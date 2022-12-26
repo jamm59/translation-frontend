@@ -20,7 +20,7 @@ export default function Section() {
             event.preventDefault();
         } catch (error) {
         }
-        fetch("/api/random")
+        fetch("/api/random_data")
         .then( response => response.json())
         .then(data => {setEnglishText(data.comment)});      
     }
@@ -70,7 +70,9 @@ export default function Section() {
                                         text-transparent bg-gradient-to-r from-pink-500 to-violet-500
                                         md:text-2xl ">
                             {englishText ? englishText :
-                            `Loading...`}
+                            `Lorem ipsum dolor, sit amet consectetur adipisicing
+                            elit. Soluta hic <i>It's Loading</i> obcaecati minima
+                             voluptatem.`}
                         </span>
                         <div className="w-full py-2 md:py-1 md:fixed md:bottom-16">
                             <Button 
