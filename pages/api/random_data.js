@@ -5,7 +5,7 @@ export default async function handler(req,res) {
     const comments = [];
 
     try {
-      fs.createReadStream("../next-data/files/chat_dataset.csv")
+      fs.createReadStream("files/chat_dataset.csv")
         .pipe(csv())
         .on('data', (data) => {comments.push(data.message)})
         .on('end', () => {

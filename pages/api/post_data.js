@@ -10,7 +10,7 @@ export default function handler(req, res) {
     const body = JSON.parse(req.body)
     const { inEnglish,inPidgin } = body;
     const content = `${inEnglish} ,,,${inPidgin}\n`;
-    const fileName = '../next-data/files/output.txt';
+    const fileName = 'files/output.txt';
     fs.appendFile(fileName, content, err => {
       if (err) {
         console.error(err)

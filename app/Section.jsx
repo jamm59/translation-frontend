@@ -80,7 +80,7 @@ export default function Section() {
                             />
                         </div>
                     </div>
-                    <div className="grid place-items-center fixed bottom-0 w-full h-16 bg-gray-800 rounded-lg p-2 ">
+                    <div className="grid place-items-center fixed bottom-0 w-full h-16 bg-gray-800 rounded-lg p-2 md:rounded-none">
                         <Input reference={input}/>
                     </div>
                 </div>
