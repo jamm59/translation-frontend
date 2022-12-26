@@ -6,6 +6,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "csv-parser": "^3.0.0",
+    "fast-csv": "^4.3.6",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"
