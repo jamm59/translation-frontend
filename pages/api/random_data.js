@@ -5,7 +5,7 @@ export default async function handler(req,res) {
     const comments = [];
 
     try {
-      fs.createReadStream("files/chat_dataset.csv")
+      fs.createReadStream("pages/api/files/chat_dataset.csv")
         .pipe(csv())
         .on('data', (data) => {comments.push(data.message)})
         .on('end', () => {
@@ -14,6 +14,6 @@ export default async function handler(req,res) {
         });
       } catch (error) {
         console.log(error);
-        res.status(200).json({ comment: "something is wrong" });
+        res.status(200).json({ comment: "something is wrong!" });
       }
 }
