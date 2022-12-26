@@ -19,7 +19,6 @@ export default function NavBar() {
                 <NavItem href={"/"} content={"Get in Touch"}/>
                 <NavItem href={"/"} content={"Learn More"}/>
                 <NavItem href={"/#about"} content={"About"}/>
-                <NavItem href={"/"} content={"Logout"}/>
            </nav>
         );
 }

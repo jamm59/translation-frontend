@@ -11,7 +11,7 @@ export default function NavItem({ href, content, type, handleClick }) {
     const menuClasses = `menu bg-rose-500 hover:bg-rose-600 md:rounded-lg`;
     return type !== "menu" ?
             
-            (<a href={href} className={classNames + " navItem"} >
+            (<a href={href} className={classNames + " navItem md:hidden"} >
             {content}
             </a>) 
            :
