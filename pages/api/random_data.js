@@ -3,9 +3,8 @@ import csv from 'csv-parser';
 
 export default async function handler(req,res) {
     const comments = [];
-
     try {
-      fs.createReadStream("pages/api/files/chat_dataset.csv")
+      fs.createReadStream("./public/files/chat_dataset.csv")
         .pipe(csv())
         .on('data', (data) => {comments.push(data.message)})
         .on('end', () => {

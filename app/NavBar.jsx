@@ -13,7 +13,7 @@ export default function NavBar() {
     }
     return(
         <nav ref={navContainer} className="bg-gray-900 text-white h-screen px-10 my-auto py-6  flex flex-col text-center
-                        md:w-[90%] md:h-16 md:rounded-md md:mt-3 md:py-2">
+                        md:w-[100%] md:h-16 md:mt-3 md:py-2 md:rounded-sm">
                 <NavItem href={""} content={"menu"} type={"menu"} handleClick={handleMenuToggle}/>
                 <NavItem href={"/"} content={"Translation site"}/>
                 <NavItem href={"/"} content={"Get in Touch"}/>

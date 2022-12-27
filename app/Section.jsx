@@ -56,8 +56,8 @@ export default function Section() {
                             md:h-[100%] md:row-span-3 ">
                 <div className="w-2/3 h-5/6 grid grid-row-4 gap-2 
                                 relative rounded-2xl drop-shadow-lg
-                                md:w-[100%]
-                                md:flex md:flex-col md:bg-teal-50" >
+                                md:w-[100%] md:rounded-t-2xl md:rounded-b-none
+                                md:flex md:flex-col " >
                     <div className="w-5/6 md:w-full md:h-16">
                         <Button 
                             clickEvent={handleSubmit}
@@ -65,11 +65,10 @@ export default function Section() {
                             FontIcon={<FontAwesomeIcon className="text-white mr-2" icon={faPaperPlane}/>}
                           />
                     </div>
-                    <div className="text-center w-3/4 py-2 rounded-md row-span-2 mx-auto mb-4 md:w-[98%]">
+                    <div className="text-center w-3/4 py-2 rounded-md row-span-2 mx-auto mb-4 md:w-[98%] ">
                         <span className="text-3xl font-black bg-clip-text 
                                         text-transparent bg-gradient-to-r 
-                                      from-pink-500 to-violet-500
-                                        md:text-2xl">
+                                      from-rose-600 to-lime-500 md:text-2xl">
                             {englishText ? englishText :`Loading...`}
                         </span>
                         <div className="w-full py-2 md:py-1 md:fixed md:bottom-16 md:grid md:place-items-center">

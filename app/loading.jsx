@@ -1,13 +1,14 @@
+import Image from "next/image";
 export default function Loading() {
-    return(<div className="h-screen w-full bg-white grid place-items-center">
-                <div className=" w-1/2 h-2/3 grid place-items-center">
-                    <img 
-                        src={"https://abidewomen.org/wp-content/uploads/2022/01/pregnant-illustration.png"} 
-                        alt={"image"} 
+    return(<div className="h-fit md:py-20 w-full md:bg-gray-900 grid place-items-center">
+                <div className=" w-1/2 h-fit flex flex-col justify-center items-center">
+                    <Image 
+                        src={"/africanart.png"} 
+                        alt="art"
+                        width={300}
                         height={400}
-                        width ={300}
                     />
-                    <p className="text-xl"><strong>Loading...</strong></p>      
+                    <p className="text-xl font-normal text-center md:text-white">Loading...</p>      
                 </div>
             </div>
         );
