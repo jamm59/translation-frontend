@@ -8,8 +8,8 @@ module.exports = {
   theme: {
 		extend: {},
 		screens: {
-			xl: { max: "1279px" },
-			// => @media (max-width: 1279px) { ... }
+			xl: { min: "1279px" },
+			// => @media (min-width: 1279px) { ... }
 
 			lg: { max: "1023px" },
 			// => @media (max-width: 1023px) { ... }

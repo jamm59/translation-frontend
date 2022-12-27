@@ -8,7 +8,7 @@ export default function Loading() {
                         width={300}
                         height={400}
                     />
-                    <p className="text-xl font-normal text-center md:text-white">Loading...</p>      
+                    <p className="text-3xl font-black text-center md:text-white">Loading...</p>      
                 </div>
             </div>
         );

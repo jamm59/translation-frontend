@@ -1,4 +1,5 @@
 "use client";
+//import jsonData from "../public/files/chat.json";
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
 // fontAwesome
@@ -10,6 +11,7 @@ config.autoAddCss = false;
 // icons
 import { faPaperPlane,faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { useRef,useState,useEffect } from "react";
+import SubLoad from "./subLoad.jsx";
 
 export default function Section() {
     const [englishText,setEnglishText] = useState("");
@@ -50,10 +52,11 @@ export default function Section() {
     useEffect(()=> {
         handleRefresh();
     },[])
-    return(<section 
+    return(<>{!englishText ? <SubLoad/> : 
+            <section 
                 className="w-full col-span-3 flex flex-col
                             justify-center items-center 
-                            md:h-[100%] md:row-span-3 ">
+                            md:h-full md:row-span-3 ">
                 <div className="w-2/3 h-5/6 grid grid-row-4 gap-2 
                                 relative rounded-2xl drop-shadow-lg
                                 md:w-[100%] md:rounded-t-2xl md:rounded-b-none
@@ -69,7 +72,7 @@ export default function Section() {
                         <span className="text-3xl font-black bg-clip-text 
                                         text-transparent bg-gradient-to-r 
                                       from-rose-600 to-lime-500 md:text-2xl">
-                            {englishText ? englishText :`Loading...`}
+                            {englishText}
                         </span>
                         <div className="w-full py-2 md:py-1 md:fixed md:bottom-16 md:grid md:place-items-center">
                             <Button 
@@ -84,5 +87,6 @@ export default function Section() {
                     </div>
                 </div>
            </section>
-        );
+           }</>);
 }
+
