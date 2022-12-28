@@ -5,17 +5,24 @@ export default function handler(req, res) {
       res.status(405).send({ message: 'Only POST requests allowed' })
       return
     }
-  
-    // not needed in NextJS v12+
-    const body = JSON.parse(req.body)
-    const { inEnglish,inPidgin } = body;
-    const content = `${inEnglish} ,,,${inPidgin}\n`;
-    const fileName = './public/files/ouptut.txt';
-    fs.appendFile(fileName, content, err => {
+    const callback = err => {
       if (err) {
         console.error(err)
         return
       }
-      console.log("file written successfully");
-    });
+      console.log("File written successfully..");
+    };
+    
+    const frontEndData = JSON.parse(req.body);
+    fs.readFile("output.json", "utf-8", function readFileCallback(err,data){
+      err ? console.log(err) : ""; 
+      
+      const obj = JSON.parse(data);
+      obj.table.push(frontEndData);
+      const json = JSON.stringify(obj);
+      fs.writeFile("output.json", json, "utf-8",callback);
+
+
+    })
+ 
   }
