@@ -1,8 +1,8 @@
 import Image from "next/image";
 export default function SubLoad() {
-    return (<div className="w-full h-full col-span-3 flex flex-col
+    return (<div className="pt-20 w-full h-full col-span-3 flex flex-col
     justify-center items-center ">
-                <Image 
+                <img 
                         src={"/africanart.png"} 
                         alt="art"
                         width={300}

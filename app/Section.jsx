@@ -56,33 +56,33 @@ export default function Section() {
             <section 
                 className="w-full col-span-3 flex flex-col
                             justify-center items-center 
-                            md:h-full md:row-span-3 ">
-                <div className="w-2/3 h-5/6 grid grid-row-4 gap-2 
+                            md:h-[50%] md:row-span-3 md:pt-20">
+                <div className="w-5/6 xl:w-[50%] h-fit grid grid-row-4 gap-2 
                                 relative rounded-2xl drop-shadow-lg
-                                md:w-[100%] md:rounded-t-2xl md:rounded-b-none
-                                md:flex md:flex-col " >
-                    <div className="w-5/6 md:w-full md:h-16">
+                                md:w-full md:rounded-t-2xl md:rounded-b-none
+                                md:flex md:flex-col md:gap-0" >
+                    <div className="w-full md:h-16 flex items-center justify-left">
                         <Button 
                             clickEvent={handleSubmit}
                             content={"submit"}
                             FontIcon={<FontAwesomeIcon className="text-white mr-2" icon={faPaperPlane}/>}
                           />
                     </div>
-                    <div className="text-center w-3/4 py-2 rounded-md row-span-2 mx-auto mb-4 md:w-[98%] ">
+                    <div className="py-2 md:py-8 text-center w-3/4 rounded-md row-span-2 mx-auto mb-4 md:w-[98%] ">
                         <span className="text-3xl font-black bg-clip-text 
                                         text-transparent bg-gradient-to-r 
                                       from-rose-600 to-lime-500 md:text-2xl">
                             {englishText}
                         </span>
-                        <div className="w-full py-2 md:py-1 md:fixed md:bottom-16 md:grid md:place-items-center">
-                            <Button 
-                                clickEvent={handleRefresh}
-                                content={"refresh"}
-                                FontIcon={<FontAwesomeIcon className="text-white mr-2 transition-transform duration-200 hover:rotate-180 hover:scale-150" icon={faArrowsRotate}/>}
-                            />
-                        </div>
                     </div>
-                    <div className="grid place-items-center fixed bottom-0 w-full h-16 bg-gray-800 rounded-lg p-2 md:rounded-none">
+                    <div className="w-full py-1 md:py-1 md:grid md:place-items-center">
+                        <Button 
+                            clickEvent={handleRefresh}
+                            content={"refresh"}
+                            FontIcon={<FontAwesomeIcon className="text-white mr-2 transition-transform duration-200 hover:rotate-180 hover:scale-150" icon={faArrowsRotate}/>}
+                        />
+                    </div>
+                    <div className="grid place-items-center  w-full h-16 bg-gray-800 rounded-lg p-2 md:rounded-none">
                         <Input reference={input}/>
                     </div>
                 </div>

@@ -13,7 +13,6 @@ export default function NavBar() {
         });
 
     }
-
     return(<>
             <Modal/>
             <nav ref={navContainer} className="bg-gray-900 text-white h-screen px-10 my-auto py-6  flex flex-col text-center
