@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    res.status(405).send({ message: "Only POST requests allowed" });
+    res.status(405).send({ message: "Method not allowed" });
     return;
   }
   const languageData = JSON.parse(req.body);
