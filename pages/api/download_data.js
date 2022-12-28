@@ -1,4 +1,7 @@
-import jsonData1 from "temp/output.json";
-export default function handler(req,res) {
-    res.send(JSON.stringify(jsonData1));
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+export default async function handler(req, res) {
+  const data = await prisma.language.findMany();
+  res.send(JSON.stringify(data));
 }
