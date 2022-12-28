@@ -1,5 +1,5 @@
 import fs from "fs";
-import jsonData from "output.json";
+import jsonData from "temp/output.json";
 
 export default function handler(req, res) {
     if (req.method !== 'POST') {
@@ -18,6 +18,6 @@ export default function handler(req, res) {
     const obj = jsonData;
     obj.table.push(frontEndData);
     const json = JSON.stringify(obj);
-    fs.writeFile("output.json", json, "utf-8",callback);
+    fs.writeFile("temp/output.json", json, "utf-8",callback);
  
   }
