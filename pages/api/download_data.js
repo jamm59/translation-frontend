@@ -1,7 +1,4 @@
-import fs from "fs";
+import jsonData1 from "output.json";
 export default function handler(req,res) {
-    fs.readFile("output.json", "utf-8", function readFileCallback(err,jsondata){
-        err ? console.log(err) : ""; 
-        res.send(JSON.stringify(jsondata));
-    });
+    res.send(JSON.stringify(jsonData1));
 }
