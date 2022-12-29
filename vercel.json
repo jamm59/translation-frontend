@@ -1,0 +1,8 @@
+{
+  "build": {
+    "persistedDirs": ["dev.db"],
+    "env": {
+      "BUILD_CACHE_INCLUDE": "dev.db"
+    }
+  }
+}
