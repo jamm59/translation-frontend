@@ -63,8 +63,8 @@ export default function Section() {
                             md:h-[50%] md:row-span-3 md:pt-20"
         >
           <div
-            className="w-5/6 xl:w-[50%] h-fit grid grid-row-4 gap-2 
-                                relative rounded-2xl drop-shadow-lg
+            className="w-[60%] h-fit grid grid-row-4 gap-2 
+                                rounded-2xl drop-shadow-lg
                                 md:w-full md:rounded-t-2xl md:rounded-b-none
                                 md:flex md:flex-col md:gap-0"
           >
@@ -89,7 +89,7 @@ export default function Section() {
                 {englishText}
               </span>
             </div>
-            <div className="w-full py-1 md:py-1 md:grid md:place-items-center">
+            <div className="w-full py-1 md:py-1 md:grid md:fixed md:bottom-16 md:place-items-center">
               <Button
                 clickEvent={handleRefresh}
                 content={"refresh"}
@@ -101,7 +101,7 @@ export default function Section() {
                 }
               />
             </div>
-            <div className="grid place-items-center  w-full h-16 bg-gray-800 rounded-lg p-2 md:rounded-none">
+            <div className="grid place-items-center md:fixed md:bottom-0 w-full h-16 bg-gray-800 rounded-lg p-2 md:rounded-none">
               <Input reference={input} />
             </div>
           </div>
