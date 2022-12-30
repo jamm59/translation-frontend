@@ -45,6 +45,8 @@ export default function Section() {
         method: "POST",
         body: JSON.stringify(data),
       });
+      alert("Thank you for submitting! ");
+      handleRefresh();
     } else {
       alert("Please type in a Longer sentence! ");
     }

@@ -19,18 +19,22 @@ export default function NavBar() {
       <nav
         ref={navContainer}
         className="bg-gray-900 md:bg-inherit text-white h-screen px-10 my-auto py-6  flex flex-col text-center
-                        md:w-[100%] md:h-16 md:mt-3 md:py-2 md:rounded-sm"
+                        md:w-[100%] md:h-16 md:mt-3 md:py-2 md:rounded-sm group"
       >
         <NavItem
           content={"How it works! "}
-          className={"hidden md:block"}
+          className={"hidden md:block group-first:first:rounded-t-md"}
           handleClick={handleMenuToggle}
         />
-        <MenuItem content={"MENU"} handleClick={handleMenuToggle} />
+        <MenuItem content={"Menu"} handleClick={handleMenuToggle} />
         <NavItem href={"/"} content={"Translation site"} />
         <NavItem href={"/"} content={"Get in Touch"} />
         <NavItem href={"/"} content={"Learn More"} />
-        <NavItem href={"/#about"} content={"About"} />
+        <NavItem
+          href={"/#about"}
+          content={"About"}
+          className={"group-last:last:rounded-b-md"}
+        />
       </nav>
     </>
   );
