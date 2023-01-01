@@ -1,9 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
-import { faBurger } from "@fortawesome/free-solid-svg-icons";
-
 export default function NavItem({ href, content, className }) {
   return (
     <a

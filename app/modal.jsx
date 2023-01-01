@@ -17,7 +17,7 @@ export default function Modal() {
         <h1 className="font-black text-xl">
           <u>Please Read !</u>
         </h1>
-        <p className="my-2 font-raleway text-md">
+        <p className="my-2 text-md">
           <strong>Hello and welcome to our website!</strong> We are working on a
           machine translation system that can accurately translate between
           pidgin and English. However, in order to achieve this goal, we need a

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import MenuItem from "./MenuItem";
 export default function NavBar() {
   const navContainer = useRef(null);
+  const menu = useRef(null);
 
   const handleMenuToggle = (event) => {
     event.preventDefault();
@@ -12,6 +13,7 @@ export default function NavBar() {
     elements.forEach((el) => {
       el.classList.toggle("md:hidden");
     });
+    menu.current.classList.toggle("md:rounded-sm");
   };
   return (
     <>
@@ -26,7 +28,11 @@ export default function NavBar() {
           className={"hidden md:block group-first:first:rounded-t-md"}
           handleClick={handleMenuToggle}
         />
-        <MenuItem content={"Menu"} handleClick={handleMenuToggle} />
+        <MenuItem
+          content={"Menu"}
+          handleClick={handleMenuToggle}
+          reference={menu}
+        />
         <NavItem href={"/"} content={"Translation site"} />
         <NavItem href={"/"} content={"Get in Touch"} />
         <NavItem href={"/"} content={"Learn More"} />
