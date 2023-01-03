@@ -4,7 +4,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth hover:scroll-auto">
       <head />
-      <body className="bg-black font-montserrat">{children}</body>
+      <body className="bg-black">{children}</body>
       <AnalyticsWrapper />
     </html>
   );
