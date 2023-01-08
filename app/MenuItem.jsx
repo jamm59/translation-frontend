@@ -2,7 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBurger } from "@fortawesome/free-solid-svg-icons";
+
+const faIcon = () => {
+  const icons = [faBars, faBurger];
+  const randomInt = Math.round(Math.random() * icons.length);
+  return icons[randomInt];
+};
 
 export default function MenuItem({ content, handleClick, reference }) {
   return (
@@ -13,7 +19,7 @@ export default function MenuItem({ content, handleClick, reference }) {
                 md:relative md:z-10 md:py-3 xl:w-[90%] md:h-16`}
       onClick={handleClick}
     >
-      <FontAwesomeIcon icon={faBars} className="mr-3 rounded-md" />
+      <FontAwesomeIcon icon={faIcon()} className="mr-3 rounded-md" />
       {content}
     </a>
   );
