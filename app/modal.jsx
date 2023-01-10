@@ -31,17 +31,15 @@ export default function Modal() {
   return (
     <div
       ref={modal}
-      className="modal grid absolute top-0 bottom-0 left-0 h-sceen right-0 bg-transparent
-                 place-items-center z-40 backdrop-blur"
+      className="modal absolute top-0 bottom-0 left-0 h-sceen right-0 bg-transparent
+                 grid place-items-center z-40 backdrop-blur"
     >
       <div
-        className="bg-white rounded-md md:rounded-sm h-fit w-[37%] md:w-full
-                   flex flex-col item-center justify-left p-6 md:absolute md:top-1"
+        className="bg-gradient-to-r from-white to-teal-500 rounded-md md:rounded-lg h-fit w-[37%] md:w-[96%]
+                   flex flex-col item-center justify-left p-6 "
       >
-        <h1 className="font-black text-xl">
-          <u>Please Read !</u>
-        </h1>
-        <p className="my-2 text-md">{next ? updateText : originText}</p>
+        <div className="text-3xl font-black md:text-2xl">Please Read !</div>
+        <p className="my-1 text-lg">{next ? updateText : originText}</p>
         <div>
           {!next ? (
             <Button
