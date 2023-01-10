@@ -66,9 +66,9 @@ export default function Section() {
         >
           <div
             className="w-[60%] min-h-fit md:h-[80%] grid grid-row-4 gap-2 
-                                rounded-2xl drop-shadow-lg
-                                md:w-full md:rounded-t-2xl md:rounded-b-none
-                                md:flex md:flex-col md:gap-0 md:fixed md:bottom-0"
+                      rounded-2xl drop-shadow-lg
+                      md:w-full md:rounded-t-2xl md:rounded-b-none
+                      md:flex md:flex-col md:gap-0 md:fixed md:bottom-0"
           >
             <div className="w-full md:h-16 flex items-center justify-left">
               <Button
@@ -91,7 +91,7 @@ export default function Section() {
                 {englishText}
               </span>
             </div>
-            <div className="w-full py-1 md:py-1 md:grid md:absolute md:bottom-16 md:place-items-center">
+            <div className="w-full py-1 md:py-1 md:flex md:justify-left md:absolute md:bottom-16 md:place-items-center">
               <Button
                 clickEvent={handleRefresh}
                 content={"refresh"}

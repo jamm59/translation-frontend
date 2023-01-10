@@ -32,7 +32,10 @@ export default function NavBar({ addModal }) {
     menu.current.classList.toggle("md:rounded-sm");
   };
   const FontIcon = (icon) => (
-    <FontAwesomeIcon className="text-white mr-2" icon={icon} />
+    <FontAwesomeIcon
+      className="text-rose-600 md:text-emerald-100 mr-2"
+      icon={icon}
+    />
   );
   return (
     <>

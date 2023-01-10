@@ -1,15 +1,26 @@
 "use client";
 import Button from "./Button";
-import { useRef } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useEffect } from "react";
 export default function Modal() {
   const [next, setNext] = useState(false);
   const modal = useRef(null);
-  const hideModal = () => {
+  const toggleModal = () => {
     //hide modal if page has been visited
     modal.current.classList.toggle("hidden");
     modal.current.classList.toggle("grid");
   };
+  // first time visitors
+  useEffect(() => {
+    const isFirstVisit = localStorage.getItem("hasVisited_34") !== "true";
+    if (isFirstVisit) {
+      localStorage.setItem("hasVisited_34", "true");
+    } else {
+      toggleModal();
+    }
+    console.log(isFirstVisit);
+  }, []);
+
   const originText = `
           Welcome to our website! We're building a machine translation system
           that can accurately translate between pidgin and English. We need a
@@ -35,7 +46,7 @@ export default function Modal() {
                  grid place-items-center z-40 backdrop-blur"
     >
       <div
-        className="bg-gradient-to-r from-white to-teal-500 rounded-md md:rounded-lg h-fit w-[37%] md:w-[96%]
+        className="bg-white rounded-md md:rounded-lg h-fit w-[37%] md:w-[96%]
                    flex flex-col item-center justify-left p-6 "
       >
         <div className="text-3xl font-black md:text-2xl">Please Read !</div>
@@ -51,7 +62,7 @@ export default function Modal() {
               }}
             />
           ) : (
-            <Button content={"close"} clickEvent={hideModal} />
+            <Button content={"close"} clickEvent={toggleModal} />
           )}
         </div>
       </div>

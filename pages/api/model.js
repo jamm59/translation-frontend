@@ -20,10 +20,15 @@ export default function handler(req, res) {
   }
   const { inputs } = JSON.parse(req.body);
   query({ inputs }).then((response) => {
-    res.status(201).send({
-      prediction: response[0].translation_text
-        ? response[0].translation_text
-        : "Error",
-    });
+    try {
+      res.status(201).send({
+        prediction: response[0].translation_text,
+      });
+    } catch (error) {
+      res.status(201).send({
+        prediction:
+          "Can you please refresh the page, you encountered an error!",
+      });
+    }
   });
 }

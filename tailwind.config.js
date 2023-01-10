@@ -7,6 +7,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        gray: {
+          // 900: "#202225",
+          // 800: "#2f3136",
+          // 700: "#36393f",
+          // 600: "#4f545c",
+          // 500: "#e3e5e8",
+        },
+      },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         raleway: ["Raleway", "sans-serif"],
