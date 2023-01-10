@@ -3,7 +3,7 @@ import NavItem from "./Link";
 import Modal from "./modal";
 import { useRef } from "react";
 import MenuItem from "./MenuItem";
-export default function NavBar() {
+export default function NavBar({ addModal }) {
   const navContainer = useRef(null);
   const menu = useRef(null);
 
@@ -17,7 +17,7 @@ export default function NavBar() {
   };
   return (
     <>
-      <Modal />
+      {addModal ? <Modal /> : <></>}
       <nav
         ref={navContainer}
         className="bg-gray-900 md:bg-inherit text-white h-screen px-10 my-auto py-6  flex flex-col text-center
@@ -33,14 +33,10 @@ export default function NavBar() {
           handleClick={handleMenuToggle}
           reference={menu}
         />
-        <NavItem href={"/"} content={"Translation site"} />
-        <NavItem href={"/"} content={"Get in Touch"} />
+        <NavItem href={"/"} content={"Home"} />
+        <NavItem href={"/translate"} content={"Translate"} />
+        <NavItem href={"/"} content={"About"} />
         <NavItem href={"/"} content={"Learn More"} />
-        <NavItem
-          href={"/#about"}
-          content={"About"}
-          className={"group-last:last:rounded-b-md"}
-        />
       </nav>
     </>
   );
