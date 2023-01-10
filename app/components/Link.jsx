@@ -1,4 +1,4 @@
-export default function NavItem({ href, content, className }) {
+export default function NavItem({ href, content, className, FontIcon }) {
   return (
     <a
       href={href}
@@ -10,6 +10,7 @@ export default function NavItem({ href, content, className }) {
       ` + className
       }
     >
+      {FontIcon}
       {content}
     </a>
   );

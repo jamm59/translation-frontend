@@ -39,7 +39,9 @@ export default function Modal() {
                    flex flex-col item-center justify-left p-6 "
       >
         <div className="text-3xl font-black md:text-2xl">Please Read !</div>
-        <p className="my-1 text-lg">{next ? updateText : originText}</p>
+        <p className="my-1 text-lg leading-snug">
+          {next ? updateText : originText}
+        </p>
         <div>
           {!next ? (
             <Button

@@ -4,3 +4,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.type {
+  background: linear-gradient(black 0 0) 0 0;
+  background-size: calc(var(--n) * 1ch) 200%;
+  background-repeat: no-repeat;
+  animation: typing calc(var(--n) * 0.1s) linear alternate;
+}
+@keyframes typing {
+  from {
+    background-size: 0 200%;
+  }
+}
+.clip {
+  color: #0000;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.step {
+  animation-timing-function: steps(var(--n));
+}
