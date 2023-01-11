@@ -40,17 +40,25 @@ export default function Section() {
     }
   };
   return (
-    <section className="col-span-3 grid place-items-center font-montserrat text-lg md:text-md md:w-full leading-snug">
-      <div className="h-full md:h-[75%] w-full flex flex-col justify-center items-center gap-3 rounded-md p-3">
+    <section
+      className="w-full col-span-3 flex flex-col
+                  justify-center md:pt-16
+                  font-montserrat text-lg md:text-md md:w-full leading-snug"
+    >
+      <div
+        className="h-full md:h-[75%] w-full flex flex-col justify-center
+                       items-center gap-3 rounded-md p-3 md:py-5"
+      >
         <div
           onClick={handleTranslateClick}
-          className="ease-in-out duration-300 cursor-pointer focus:translate-x-2 hover:translate-x-2 w-[50%] text-center h-[5%]
-                     font-black text-3xl text-white md:w-[80%] md:mb-4"
+          className="ease-in-out duration-300 cursor-pointer
+                     focus:translate-x-2 hover:translate-x-2 w-[50%] text-center h-[5%]
+                     font-black text-3xl text-white md:w-[80%] md:mb-4 "
         >
           {displayData ? (
             <>
               <FontAwesomeIcon
-                className="mr-3 text-rose-600"
+                className="mr-3 text-rose-400"
                 icon={faLanguage}
               />
               Translate
@@ -58,14 +66,14 @@ export default function Section() {
           ) : (
             <>
               <FontAwesomeIcon
-                className="mr-3 text-rose-600 animate-spin"
+                className="mr-3 text-pink-700 animate-spin"
                 icon={faSpinner}
               />
-              Translating
+              translating...
             </>
           )}
         </div>
-        <div className="bg-white rounded-lg p-3 md:p-2 min-h-fit h-[50%] w-[60%] flex flex-col justify-spacebetween items-center gap-2 md:w-full md:h-full ">
+        <div className="bg-white rounded-lg p-3 md:p-2 min-h-fit md:h-80 h-[50%] w-[60%] flex flex-col justify-spacebetween items-center gap-2 md:w-full ">
           <LargeInput reference={input} />
           <TranslateSection reference={display} prediction={displayData} />
         </div>

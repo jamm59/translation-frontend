@@ -8,7 +8,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 // icons
 import {
-  faHouse,
+  faBook,
   faAddressCard,
   faLanguage,
   faGraduationCap,
@@ -43,7 +43,7 @@ export default function NavBar({ addModal }) {
       <nav
         ref={navContainer}
         className="bg-gray-900 md:bg-inherit text-white h-screen px-10 my-auto py-6  flex flex-col text-center
-                        md:w-[100%] md:h-16 md:mt-3 md:py-2 md:rounded-sm group"
+                        md:w-[100%] md:h-16 md:mt-3 md:py-2 md:rounded-sm"
       >
         <NavItem
           content={"How it works! "}
@@ -56,7 +56,6 @@ export default function NavBar({ addModal }) {
           handleClick={handleMenuToggle}
           reference={menu}
         />
-        <NavItem href={"/"} content={"Home"} FontIcon={FontIcon(faHouse)} />
         <NavItem
           href={"/translate"}
           content={"Translate"}
@@ -66,6 +65,11 @@ export default function NavBar({ addModal }) {
           href={"/"}
           content={"About"}
           FontIcon={FontIcon(faAddressCard)}
+        />
+        <NavItem
+          href={"/"}
+          content={"Help improve"}
+          FontIcon={FontIcon(faBook)}
         />
         <NavItem
           href={"https://huggingface.co/tasks/translation"}

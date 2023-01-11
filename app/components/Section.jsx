@@ -61,8 +61,8 @@ export default function Section() {
       ) : (
         <section
           className="w-full col-span-3 flex flex-col
-                            justify-center items-center 
-                            md:h-[50%] md:row-span-3 md:pt-20"
+                    justify-center items-center
+                    md:h-[50%] md:row-span-3 md:pt-20"
         >
           <div
             className="w-[60%] min-h-fit md:h-[80%] grid grid-row-4 gap-2 
