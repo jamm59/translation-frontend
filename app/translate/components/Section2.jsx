@@ -12,6 +12,31 @@ import LargeInput from "./LargeInput";
 import TranslateSection from "./Translate";
 import { useRef, useState } from "react";
 
+async function query(data) {
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189",
+    {
+      headers: {
+        Authorization: "Bearer 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",
+      },
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+  );
+  const result = await response.json();
+  return result;
+}
+function storeData({ prediction, inputs }) {
+  const data = {
+    inEnglish: inputs,
+    inPidgin: prediction,
+  };
+  fetch("/api/post_data", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
 export default function Section() {
   const [displayData, setDisplayData] = useState(
     "Type in a sentence in the input box above to get a translation .."
@@ -19,24 +44,26 @@ export default function Section() {
   const input = useRef(null);
   const display = useRef(null);
   const handleTranslateClick = () => {
+    display.current.classList.toggle("type");
     setDisplayData("");
     const value = input.current.value;
     if (value < 5) {
       setDisplayData("Type in a longer sentence..");
     } else {
-      const data = {
-        inputs: value,
-      };
-      display.current.classList.toggle("type");
-      fetch("/api/model", {
-        method: "POST",
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          display.current.classList.toggle("type");
-          setDisplayData(data.prediction);
-        });
+      const inputs = value;
+      query({ inputs }).then((response) => {
+        display.current.classList.toggle("type");
+        try {
+          const prediction = response[0].translation_text;
+          setDisplayData(prediction);
+          storeData({ prediction, inputs });
+        } catch (error) {
+          //console.log(response);
+          setDisplayData(
+            "Can you please refresh the page, an error was encountered!"
+          );
+        }
+      });
     }
   };
   return (
@@ -57,16 +84,13 @@ export default function Section() {
         >
           {displayData ? (
             <>
-              <FontAwesomeIcon
-                className="mr-3 text-rose-400"
-                icon={faLanguage}
-              />
+              <FontAwesomeIcon className="mr-3 text-white" icon={faLanguage} />
               Translate
             </>
           ) : (
             <>
               <FontAwesomeIcon
-                className="mr-3 text-pink-700 animate-spin"
+                className="mr-3 text-white animate-spin"
                 icon={faSpinner}
               />
               translating...

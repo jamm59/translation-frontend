@@ -9,7 +9,7 @@
   background: linear-gradient(black 0 0) 0 0;
   background-size: calc(var(--n) * 1ch) 200%;
   background-repeat: no-repeat;
-  animation: typing calc(var(--n) * 0.1s) linear alternate;
+  animation: typing calc(var(--n) * 0.05s) linear alternate;
 }
 @keyframes typing {
   from {
