@@ -12,31 +12,6 @@ import LargeInput from "./LargeInput";
 import TranslateSection from "./Translate";
 import { useRef, useState } from "react";
 
-async function query(data) {
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189",
-    {
-      headers: {
-        Authorization: "Bearer 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",
-      },
-      method: "POST",
-      body: JSON.stringify(data),
-    }
-  );
-  const result = await response.json();
-  return result;
-}
-function storeData({ prediction, inputs }) {
-  const data = {
-    inEnglish: inputs,
-    inPidgin: prediction,
-  };
-  fetch("/api/post_data", {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
-}
-
 export default function Section() {
   const [displayData, setDisplayData] = useState(
     "Type in a sentence in the input box above to get a translation .."
@@ -51,19 +26,7 @@ export default function Section() {
       setDisplayData("Type in a longer sentence..");
     } else {
       const inputs = value;
-      query({ inputs }).then((response) => {
-        display.current.classList.toggle("type");
-        try {
-          const prediction = response[0].translation_text;
-          setDisplayData(prediction);
-          storeData({ prediction, inputs });
-        } catch (error) {
-          //console.log(response);
-          setDisplayData(
-            "Can you please refresh the page, an error was encountered!"
-          );
-        }
-      });
+      retryPostRequest(inputs, display, setDisplayData);
     }
   };
   return (
@@ -104,4 +67,45 @@ export default function Section() {
       </div>
     </section>
   );
+}
+function retryPostRequest(inputs, display, setDisplayData) {
+  query({ inputs }).then((response) => {
+    display.current.classList.toggle("type");
+    try {
+      let prediction = response[0].translation_text;
+      prediction = prediction.replace(",,", "").replace("well,well", "");
+      setDisplayData(prediction);
+      storeData({ prediction, inputs });
+    } catch (error) {
+      console.log(response);
+      setDisplayData(
+        "Error encountered Please try refreshing the page maybe once or twice."
+      );
+    }
+  });
+}
+
+async function query(data) {
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189",
+    {
+      headers: {
+        Authorization: "Bearer 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",
+      },
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+  );
+  const result = await response.json();
+  return result;
+}
+function storeData({ prediction, inputs }) {
+  const data = {
+    inEnglish: inputs,
+    inPidgin: prediction,
+  };
+  fetch("/api/post_data", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
 }
