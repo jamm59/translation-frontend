@@ -73,13 +73,13 @@ function retryPostRequest(inputs, display, setDisplayData) {
     display.current.classList.toggle("type");
     try {
       let prediction = response[0].translation_text;
-      prediction = prediction.replace(",,", "").replace("well,well", "");
+      prediction = prediction.replace("well,well", "");
       setDisplayData(prediction);
       storeData({ prediction, inputs });
     } catch (error) {
       console.log(response);
       setDisplayData(
-        "Error encountered Please try refreshing the page maybe once or twice."
+        "Error encountered Please try refreshing the page twice OR wait for about 20s and try again."
       );
     }
   });
@@ -87,7 +87,7 @@ function retryPostRequest(inputs, display, setDisplayData) {
 
 async function query(data) {
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189",
+    "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583188",
     {
       headers: {
         Authorization: "Bearer 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",
