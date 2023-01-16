@@ -10,7 +10,8 @@ import { faLanguage, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import LargeInput from "./LargeInput";
 import TranslateSection from "./Translate";
-import { useRef, useState } from "react";
+import Loading from "../components/loading2";
+import { useRef, useState, useEffect } from "react";
 
 export default function Section() {
   const [displayData, setDisplayData] = useState(
@@ -18,71 +19,104 @@ export default function Section() {
   );
   const input = useRef(null);
   const display = useRef(null);
+  const [preLoadDone, setPreLoadDone] = useState(true);
+
   const handleTranslateClick = () => {
     display.current.classList.toggle("type");
     setDisplayData("");
     const value = input.current.value;
-    if (value < 5) {
+    if (value.length < 5) {
       setDisplayData("Type in a longer sentence..");
     } else {
       const inputs = value;
       retryPostRequest(inputs, display, setDisplayData);
     }
   };
+  useEffect(() => {
+    let intervalId;
+
+    fetch("/api/random_data").then((dataResponse) => {
+      const initialResponse = dataResponse.json();
+      const inputs = initialResponse.comment;
+      query({ inputs }).then((response) => {
+        if (!response.error) {
+          setPreLoadDone(true);
+          console.log(response);
+        } else {
+          setPreLoadDone(false);
+          let count = 0;
+          intervalId = setInterval(() => {
+            count++;
+            if (count === 20) {
+              setPreLoadDone(true);
+              clearInterval(intervalId);
+            }
+          }, 1000);
+        }
+      });
+      //.catch((error) => {});
+    });
+    return () => clearInterval(intervalId);
+  }, []);
   return (
-    <section
-      className="w-full col-span-3 flex flex-col
+    <>
+      {!preLoadDone ? (
+        <Loading />
+      ) : (
+        <section
+          className="w-full col-span-3 flex flex-col
                   justify-center md:pt-16
                   font-montserrat text-lg md:text-md md:w-full leading-snug"
-    >
-      <div
-        className="h-full md:h-[75%] w-full flex flex-col justify-center
+        >
+          <div
+            className="h-full md:h-[75%] w-full flex flex-col justify-center
                        items-center gap-3 rounded-md p-3 md:py-5"
-      >
-        <div
-          onClick={handleTranslateClick}
-          className="ease-in-out duration-300 cursor-pointer
+          >
+            <div
+              onClick={handleTranslateClick}
+              className="ease-in-out duration-300 cursor-pointer
                      focus:translate-x-2 hover:translate-x-2 w-[50%] text-center h-[5%]
                      font-black text-3xl text-white md:w-[80%] md:mb-4 "
-        >
-          {displayData ? (
-            <>
-              <FontAwesomeIcon className="mr-3 text-white" icon={faLanguage} />
-              Translate
-            </>
-          ) : (
-            <>
-              <FontAwesomeIcon
-                className="mr-3 text-white animate-spin"
-                icon={faSpinner}
-              />
-              translating...
-            </>
-          )}
-        </div>
-        <div className="bg-white rounded-lg p-3 md:p-2 min-h-fit md:h-80 h-[50%] w-[60%] flex flex-col justify-spacebetween items-center gap-2 md:w-full ">
-          <LargeInput reference={input} />
-          <TranslateSection reference={display} prediction={displayData} />
-        </div>
-      </div>
-    </section>
+            >
+              {displayData ? (
+                <>
+                  <FontAwesomeIcon
+                    className="mr-3 text-white"
+                    icon={faLanguage}
+                  />
+                  Translate
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    className="mr-3 text-white animate-spin"
+                    icon={faSpinner}
+                  />
+                  translating...
+                </>
+              )}
+            </div>
+            <div className="bg-white rounded-lg p-3 md:p-2 min-h-fit md:h-80 h-[50%] w-[60%] flex flex-col justify-spacebetween items-center gap-2 md:w-full ">
+              <LargeInput reference={input} />
+              <TranslateSection reference={display} prediction={displayData} />
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }
-function retryPostRequest(inputs, display, setDisplayData) {
-  query({ inputs }).then((response) => {
+async function retryPostRequest(inputs, display, setDisplayData) {
+  try {
+    const response = await query({ inputs });
     display.current.classList.toggle("type");
-    try {
-      let prediction = response[0].translation_text;
-      prediction = prediction.replace("well,well", "");
+    if (!response.error) {
+      const prediction = response[0].translation_text;
       setDisplayData(prediction);
-      storeData({ prediction, inputs });
-    } catch (error) {
-      console.log(response);
-      setDisplayData(
-        "Error encountered Please try refreshing the page twice OR wait for about 20s and try again."
-      );
     }
-  });
+  } catch (error) {
+    setDisplayData("An error occurred, please try again later.");
+  }
 }
 
 async function query(data) {
