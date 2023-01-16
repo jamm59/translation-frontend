@@ -28,7 +28,7 @@
 }
 @keyframes progress-animate {
   to {
-    width: 100%;
+    width: 110%;
   }
 }
 @keyframes typing {

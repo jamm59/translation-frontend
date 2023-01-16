@@ -15,11 +15,11 @@ import { useRef, useState, useEffect } from "react";
 
 export default function Section() {
   const [displayData, setDisplayData] = useState(
-    "Type in a sentence in the input box above to get a translation .."
+    "Type in a sentence in the input box above to get a translation and then click 'Translate' above .."
   );
   const input = useRef(null);
   const display = useRef(null);
-  const [preLoadDone, setPreLoadDone] = useState(true);
+  const [preLoadDone, setPreLoadDone] = useState(false);
 
   const handleTranslateClick = () => {
     display.current.classList.toggle("type");
