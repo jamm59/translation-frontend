@@ -47,7 +47,7 @@ export default function Section() {
           let count = 0;
           intervalId = setInterval(() => {
             count++;
-            if (count === 20) {
+            if (count === 15) {
               setPreLoadDone(true);
               clearInterval(intervalId);
             }
@@ -96,7 +96,11 @@ export default function Section() {
                 </>
               )}
             </div>
-            <div className="bg-white rounded-lg p-3 md:p-2 min-h-fit md:h-80 h-[50%] w-[60%] flex flex-col justify-spacebetween items-center gap-2 md:w-full ">
+            <div
+              className="bg-white rounded-lg p-3 md:p-2 min-h-fit 
+            md:h-80 h-[50%] w-[60%] flex flex-col justify-spacebetween 
+            items-center gap-2 md:w-[95%] "
+            >
               <LargeInput reference={input} />
               <TranslateSection reference={display} prediction={displayData} />
             </div>
