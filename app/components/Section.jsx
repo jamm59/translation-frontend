@@ -91,7 +91,7 @@ export default function Section() {
                 {englishText}
               </span>
             </div>
-            <div className="w-full py-1 md:py-1 md:flex md:justify-left md:absolute md:bottom-16 md:place-items-center">
+            <div className="w-full py-1 md:py-1 md:flex md:justify-left md:absolute md:bottom-20 md:place-items-center">
               <Button
                 clickEvent={handleRefresh}
                 content={"refresh"}
@@ -105,7 +105,7 @@ export default function Section() {
             </div>
             <div
               className="grid place-items-center md:absolute md:bottom-0 w-full
-                            h-16 bg-gray-800 rounded-lg p-2 md:rounded-none"
+                        min-h-16 h-fit bg-gray-800 rounded-lg p-1 md:rounded-none"
             >
               <Input reference={input} />
             </div>

@@ -47,7 +47,7 @@ export default function Section() {
           let count = 0;
           intervalId = setInterval(() => {
             count++;
-            if (count === 15) {
+            if (count === 8) {
               setPreLoadDone(true);
               clearInterval(intervalId);
             }
@@ -117,6 +117,7 @@ async function retryPostRequest(inputs, display, setDisplayData) {
     if (!response.error) {
       const prediction = response[0].translation_text;
       setDisplayData(prediction);
+      storeData({ prediction, inputs });
     }
   } catch (error) {
     setDisplayData("An error occurred, please try again later.");
