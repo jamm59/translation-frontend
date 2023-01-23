@@ -68,7 +68,7 @@ export default function Section() {
             className="w-[60%] min-h-fit md:h-[80%] grid grid-row-4 gap-2 
                       rounded-2xl drop-shadow-lg
                       md:w-full md:rounded-t-2xl md:rounded-b-none
-                      md:flex md:flex-col md:gap-0 md:fixed md:bottom-0"
+                      md:flex md:flex-col md:gap-0 md:absolute md:bottom-0"
           >
             <div className="w-full md:h-16 flex items-center justify-left">
               <Button
@@ -105,7 +105,7 @@ export default function Section() {
             </div>
             <div
               className="grid place-items-center md:absolute md:bottom-0 w-full
-                        h-fit rounded-lg p-1 md:rounded-none md:mb-1 bg-emerald-100"
+                        h-1/5 rounded-lg p-1 md:rounded-none md:mb-1 bg-white"
             >
               <Input reference={input} />
             </div>
