@@ -105,7 +105,7 @@ export default function Section() {
             </div>
             <div
               className="grid place-items-center md:absolute md:bottom-0 w-full
-                        h-fit md:h-1/5 rounded-lg p-1 md:p-0.5 md:rounded-none md:mb-1 bg-white"
+                        h-fit md:h-16 rounded-lg p-1 md:p-0.5 md:rounded-none bg-white"
             >
               <Input reference={input} />
             </div>
