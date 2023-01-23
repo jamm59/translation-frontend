@@ -8,11 +8,12 @@ export default function Input({ reference }) {
       <textarea
         autoFocus
         onInput={onInputHandler}
-        placeholder="Type in pidgin the text above... "
+        placeholder="Enter text here .. "
         ref={reference}
-        className="w-full h-full rounded-lg drop-shadow-lg bg-gray-700 text-lg leading-snug
-                resize-none outline-none text-white flex px-2 py-2 overflow-y-hidden
-                border-8 border-gray-700 font-montserrat max-h-28 md:max-h-full"
+        className="w-full h-full max-h-28 md:max-h-16 rounded-lg drop-shadow-lg
+                 bg-gray-800 text-lg leading-snug
+                resize-none outline-none text-white flex p-2 overflow-y-hidden
+                border-6 border-gray-800 font-montserrat"
       ></textarea>
     </>
   );
