@@ -47,6 +47,7 @@ export default function Section() {
           let count = 0;
           intervalId = setInterval(() => {
             count++;
+            // waiting for model to download
             if (count === 8) {
               setPreLoadDone(true);
               clearInterval(intervalId);
