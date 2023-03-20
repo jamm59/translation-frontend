@@ -1,7 +1,7 @@
 "use client";
-import Button from "./Button";
+import Button from "../components/Button";
 import { useRef, useState } from "react";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 export default function Modal() {
   const [next, setNext] = useState(false);
   const modal = useRef(null);
@@ -11,15 +11,15 @@ export default function Modal() {
     modal.current.classList.toggle("grid");
   };
   // first time visitors
-  useEffect(() => {
-    const isFirstVisit = localStorage.getItem("hasVisited_34") !== "true";
-    if (isFirstVisit) {
-      localStorage.setItem("hasVisited_34", "true");
-    } else {
-      toggleModal();
-    }
-    console.log(isFirstVisit);
-  }, []);
+  // useEffect(() => {
+  //   const isFirstVisit = localStorage.getItem("hasVisited_34") !== "true";
+  //   if (isFirstVisit) {
+  //     localStorage.setItem("hasVisited_34", "true");
+  //   } else {
+  //     toggleModal();
+  //   }
+  //   console.log(isFirstVisit);
+  // }, []);
 
   const originText = `
           Welcome to our website! We're building a machine translation system

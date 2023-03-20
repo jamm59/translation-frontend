@@ -2,19 +2,14 @@
 //import jsonData from "../public/files/chat.json";
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
+import { SubLoad } from "../components/loading";
 // fontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//importing font awesome css
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
-// icons
 import {
+  FontAwesomeIcon,
   faPaperPlane,
   faArrowsRotate,
-} from "@fortawesome/free-solid-svg-icons";
+} from "../../lib/fontawesome.js";
 import { useRef, useState, useEffect } from "react";
-import SubLoad from "./subLoad.jsx";
 
 export default function Section() {
   const [englishText, setEnglishText] = useState("");
@@ -27,7 +22,8 @@ export default function Section() {
     fetch("/api/random_data")
       .then((response) => response.json())
       .then((data) => {
-        setEnglishText(data.comment);
+        // this will return the first 160 characters
+        setEnglishText(data.comment.slice(0, 160));
       });
   };
   const handleSubmit = (event) => {

@@ -1,16 +1,9 @@
 "use client";
 // fontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//importing font awesome css
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
-// icons
-import { faLanguage, faSpinner } from "@fortawesome/free-solid-svg-icons";
-
-import LargeInput from "./LargeInput";
-import TranslateSection from "./Translate";
-import Loading from "../components/loading2";
+import { FontAwesomeIcon, faLanguage, faSpinner } from "../../lib/fontawesome";
+import { LargeInput } from "../components/Input";
+import TranslateSection from "../components/Translate";
+import { SecondLoad } from "../components/loading";
 import { useRef, useState, useEffect } from "react";
 
 export default function Section() {
@@ -48,7 +41,7 @@ export default function Section() {
           intervalId = setInterval(() => {
             count++;
             // waiting for model to download
-            if (count === 8) {
+            if (count === 2) {
               setPreLoadDone(true);
               clearInterval(intervalId);
             }
@@ -62,7 +55,7 @@ export default function Section() {
   return (
     <>
       {!preLoadDone ? (
-        <Loading />
+        <SecondLoad />
       ) : (
         <section
           className="w-full col-span-3 flex flex-col
@@ -74,18 +67,31 @@ export default function Section() {
                        items-center gap-3 rounded-md p-3 md:py-5"
           >
             <div
-              onClick={handleTranslateClick}
-              className="ease-in-out duration-300 cursor-pointer
-                     focus:translate-x-2 hover:translate-x-2 w-[50%] text-center h-[5%]
-                     font-black text-3xl text-white md:w-[80%] md:mb-4 "
+              className="cursor-pointer
+                      w-[50%] flex justify-around h-[5%]
+                     font-black text-3xl md:text-2xl text-white md:w-[80%] md:mb-4"
             >
               {displayData ? (
                 <>
-                  <FontAwesomeIcon
-                    className="mr-3 text-white"
-                    icon={faLanguage}
-                  />
-                  Translate
+                  <button
+                    onClick={handleTranslateClick}
+                    className="ease-in-out duration-300 focus:translate-x-2 hover:translate-x-2"
+                  >
+                    <FontAwesomeIcon
+                      className="mr-3 text-white"
+                      icon={faLanguage}
+                    />
+                    Translate
+                  </button>
+
+                  <select className="bg-black font-normal text-sm font-montserrat text-center focus:outline-none">
+                    <option value="pg">Pidgin</option>
+                    <option value="language">Languages</option>
+                    <option value="fr">French</option>
+                    <option value="gr">German</option>
+                    <option value="es">Spanish</option>
+                    <option value="dt">Dutch</option>
+                  </select>
                 </>
               ) : (
                 <>
@@ -103,7 +109,11 @@ export default function Section() {
             items-center gap-2 md:w-[95%] "
             >
               <LargeInput reference={input} />
-              <TranslateSection reference={display} prediction={displayData} />
+              <TranslateSection
+                reference={display}
+                prediction={displayData}
+                inputTag={input}
+              />
             </div>
           </div>
         </section>

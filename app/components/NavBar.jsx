@@ -1,27 +1,25 @@
 "use client";
+import { useRef } from "react";
 
 // fontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//importing font awesome css
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
-// icons
 import {
+  FontAwesomeIcon,
   faBook,
   faAddressCard,
   faLanguage,
   faGraduationCap,
   faQuestion,
-} from "@fortawesome/free-solid-svg-icons";
+} from "../../lib/fontawesome.js";
 
-import NavItem from "./Link";
-import Modal from "./modal";
-import { useRef } from "react";
-import MenuItem from "./MenuItem";
+import NavItem from "../components/Link";
+import Modal from "../components/modal";
+import MenuItem from "../components/MenuItem";
+import AboutME from "../components/About";
+
 export default function NavBar({ addModal }) {
   const navContainer = useRef(null);
   const menu = useRef(null);
+  const aboutRef = useRef(null);
 
   const handleMenuToggle = (event) => {
     event.preventDefault();
@@ -37,9 +35,16 @@ export default function NavBar({ addModal }) {
       icon={icon}
     />
   );
+  const toggleAbout = (event, aboutRef) => {
+    event.preventDefault();
+    //hide modal if page has been visited
+    aboutRef.current.classList.toggle("hidden");
+    aboutRef.current.classList.toggle("grid");
+  };
   return (
     <>
       {addModal ? <Modal /> : <></>}
+      <AboutME innerRef={aboutRef} toggleAbout={toggleAbout} />
       <nav
         ref={navContainer}
         className="bg-gray-900 md:bg-inherit text-white h-screen px-10 my-auto py-6  flex flex-col text-center
@@ -63,11 +68,6 @@ export default function NavBar({ addModal }) {
         />
         <NavItem
           href={"/"}
-          content={"About"}
-          FontIcon={FontIcon(faAddressCard)}
-        />
-        <NavItem
-          href={"/"}
           content={"Help improve"}
           FontIcon={FontIcon(faBook)}
         />
@@ -75,6 +75,12 @@ export default function NavBar({ addModal }) {
           href={"https://huggingface.co/tasks/translation"}
           content={"Learn More"}
           FontIcon={FontIcon(faGraduationCap)}
+        />
+        <NavItem
+          href={"/"}
+          content={"About"}
+          FontIcon={FontIcon(faAddressCard)}
+          onClick={(e) => toggleAbout(e, aboutRef)}
         />
       </nav>
     </>

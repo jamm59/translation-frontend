@@ -1,7 +1,14 @@
-export default function NavItem({ href, content, className, FontIcon }) {
+export default function NavItem({
+  href,
+  content,
+  className,
+  FontIcon,
+  onClick,
+}) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={
         `navItem md:hidden rounded-lg md:rounded-sm text-white 
                bg-gray-800 my-3 mx-1 p-2 transition-all ease-in 
