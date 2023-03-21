@@ -78,7 +78,7 @@ export default function NavBar({ addModal }) {
         />
         <NavItem
           href={"/"}
-          content={"About"}
+          content={"About ME"}
           FontIcon={FontIcon(faAddressCard)}
           onClick={(e) => toggleAbout(e, aboutRef)}
         />

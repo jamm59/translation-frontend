@@ -1,7 +1,7 @@
 import Button from "../components/Button";
 import { forwardRef } from "react";
 
-const AboutME = forwardRef(({ innerRef, toggleAbout }) => {
+const AboutME = forwardRef(({ innerRef, toggleAbout }, ref) => {
   return (
     <div
       ref={innerRef}

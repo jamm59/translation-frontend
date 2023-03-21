@@ -13,7 +13,12 @@ export default function Section() {
   const input = useRef(null);
   const display = useRef(null);
   const [preLoadDone, setPreLoadDone] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("Languages");
 
+  const handleChange = (event) => {
+    const languageCode = event.target.value; // convert selected option to language code
+    setSelectedValue(languageCode);
+  };
   const handleTranslateClick = () => {
     display.current.classList.toggle("type");
     setDisplayData("");
@@ -22,7 +27,7 @@ export default function Section() {
       setDisplayData("Type in a longer sentence..");
     } else {
       const inputs = value;
-      retryPostRequest(inputs, display, setDisplayData);
+      retryPostRequest(inputs, display, setDisplayData, selectedValue);
     }
   };
   useEffect(() => {
@@ -84,23 +89,25 @@ export default function Section() {
                     Translate
                   </button>
 
-                  <select className="bg-black font-normal text-sm font-montserrat text-center focus:outline-none">
-                    <option value="pg">Pidgin</option>
-                    <option value="language">Languages</option>
-                    <option value="fr">French</option>
-                    <option value="gr">German</option>
-                    <option value="es">Spanish</option>
-                    <option value="dt">Dutch</option>
+                  <select
+                    onChange={handleChange}
+                    className="bg-black font-normal text-sm font-montserrat text-center focus:outline-none"
+                  >
+                    <option value="language">{selectedValue}</option>
+                    <option value="Pidgin">Pidgin</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Romanian">Romanian</option>
                   </select>
                 </>
               ) : (
-                <>
+                <span>
                   <FontAwesomeIcon
                     className="mr-3 text-white animate-spin"
                     icon={faSpinner}
                   />
                   translating...
-                </>
+                </span>
               )}
             </div>
             <div
@@ -121,41 +128,60 @@ export default function Section() {
     </>
   );
 }
-async function retryPostRequest(inputs, display, setDisplayData) {
+async function retryPostRequest(inputs, display, setDisplayData, Lang) {
   try {
-    const response = await query({ inputs });
+    const response = await query({ inputs }, Lang);
     display.current.classList.toggle("type");
     if (!response.error) {
-      const prediction = response[0].translation_text;
+      let prediction;
+      if (response.translation_text) {
+        prediction = response.translation_text;
+      } else {
+        prediction = response[0].translation_text;
+      }
       setDisplayData(prediction);
-      storeData({ prediction, inputs });
+      storeData({ prediction, inputs }, Lang);
     }
   } catch (error) {
     setDisplayData("An error occurred, please try again later.");
   }
 }
-
-async function query(data) {
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583188",
-    {
+async function query(data, Lang) {
+  let secretUrl, secretKey;
+  if (Lang === "Pidgin") {
+    secretUrl =
+      "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583188";
+    secretKey = "Bearer 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";
+  } else {
+    if (Lang === "language")
+      return {
+        error: false,
+        translation_text: "SElect a langauge to Translate to!",
+      };
+    secretUrl = "https://api-inference.huggingface.co/models/t5-base";
+    secretKey = "Bearer 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";
+    data.inputs = `translate English to ${Lang}: ${data.inputs}`;
+    console.log(data);
+    const response = await fetch(secretUrl, {
       headers: {
-        Authorization: "Bearer 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",
+        Authorization: secretKey,
       },
       method: "POST",
       body: JSON.stringify(data),
-    }
-  );
-  const result = await response.json();
-  return result;
+    });
+    const result = await response.json();
+    return result;
+  }
 }
-function storeData({ prediction, inputs }) {
-  const data = {
-    inEnglish: inputs,
-    inPidgin: prediction,
-  };
-  fetch("/api/post_data", {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
+function storeData({ prediction, inputs }, Lang) {
+  if (Lang === "Pidgin") {
+    const data = {
+      inEnglish: inputs,
+      inPidgin: prediction,
+    };
+    fetch("/api/post_data", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
 }
