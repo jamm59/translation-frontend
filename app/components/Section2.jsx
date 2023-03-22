@@ -32,26 +32,6 @@ export default function Section() {
   };
   useEffect(() => {
     let intervalId;
-    {
-      async function query(data) {
-        const response = await fetch(
-          "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189",
-          {
-            headers: {
-              Authorization: "Bearer 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",
-            },
-            method: "POST",
-            body: JSON.stringify(data),
-          }
-        );
-        const result = await response.json();
-        return result;
-      }
-
-      query({ inputs: "How are you" }).then((response) => {
-        console.log(JSON.stringify(response));
-      });
-    }
     fetch("/api/random_data").then((dataResponse) => {
       const initialResponse = dataResponse.json();
       const inputs = initialResponse.comment;
@@ -60,7 +40,6 @@ export default function Section() {
         query({ inputs }, "French").then();
         if (!response.error) {
           setPreLoadDone(true);
-          console.log(response);
         } else {
           setPreLoadDone(false);
           let count = 0;
