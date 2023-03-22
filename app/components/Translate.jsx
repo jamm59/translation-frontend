@@ -7,6 +7,7 @@ export default function TranslateSection({ reference, prediction, inputTag }) {
 
   if (loadingDone) inputTag.current.disabled = false;
 
+  console.log(prediction);
   return !loadingDone ? (
     <>
       <div

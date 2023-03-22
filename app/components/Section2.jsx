@@ -13,11 +13,14 @@ export default function Section() {
   const input = useRef(null);
   const display = useRef(null);
   const [preLoadDone, setPreLoadDone] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("Languages");
+  const [selectedValue, setSelectedValue] = useState({
+    value: "Languages",
+    Languages: "Languages",
+  });
 
   const handleChange = (event) => {
     const languageCode = event.target.value; // convert selected option to language code
-    setSelectedValue(languageCode);
+    setSelectedValue({ value: languageCode, Languages: languageCode });
   };
   const handleTranslateClick = () => {
     display.current.classList.toggle("type");
@@ -27,7 +30,7 @@ export default function Section() {
       setDisplayData("Type in a longer sentence..");
     } else {
       const inputs = value;
-      retryPostRequest(inputs, display, setDisplayData, selectedValue);
+      retryPostRequest(inputs, display, setDisplayData, selectedValue.value);
     }
   };
   useEffect(() => {
@@ -93,7 +96,9 @@ export default function Section() {
                     onChange={handleChange}
                     className="bg-black font-normal text-sm font-montserrat text-center focus:outline-none"
                   >
-                    <option value="language">{selectedValue}</option>
+                    <option value={selectedValue.value}>
+                      {selectedValue.Languages}
+                    </option>
                     <option value="Pidgin">Pidgin</option>
                     <option value="French">French</option>
                     <option value="German">German</option>
@@ -154,7 +159,7 @@ async function query(data, Lang) {
 
     secretKey = "Bearer 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";
   } else {
-    if (Lang === "language")
+    if (Lang === "Languages")
       return {
         error: false,
         translation_text: "SElect a langauge to Translate to!",
