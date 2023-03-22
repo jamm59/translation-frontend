@@ -32,11 +32,32 @@ export default function Section() {
   };
   useEffect(() => {
     let intervalId;
+    {
+      async function query(data) {
+        const response = await fetch(
+          "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189",
+          {
+            headers: {
+              Authorization: "Bearer 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",
+            },
+            method: "POST",
+            body: JSON.stringify(data),
+          }
+        );
+        const result = await response.json();
+        return result;
+      }
 
+      query({ inputs: "How are you" }).then((response) => {
+        console.log(JSON.stringify(response));
+      });
+    }
     fetch("/api/random_data").then((dataResponse) => {
       const initialResponse = dataResponse.json();
       const inputs = initialResponse.comment;
-      query({ inputs }).then((response) => {
+      // both query functions are used to preLoad the models
+      query({ inputs }, "Pidgin").then((response) => {
+        query({ inputs }, "French").then();
         if (!response.error) {
           setPreLoadDone(true);
           console.log(response);
@@ -150,8 +171,9 @@ async function query(data, Lang) {
   let secretUrl, secretKey;
   if (Lang === "Pidgin") {
     secretUrl =
-      "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583188";
-    secretKey = "Bearer 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";
+      "https://api-inference.huggingface.co/models/jamm55/autotrain-improved-pidgin-model-2837583189";
+
+    secretKey = "Bearer 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";
   } else {
     if (Lang === "language")
       return {
@@ -161,17 +183,16 @@ async function query(data, Lang) {
     secretUrl = "https://api-inference.huggingface.co/models/t5-base";
     secretKey = "Bearer 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";
     data.inputs = `translate English to ${Lang}: ${data.inputs}`;
-    console.log(data);
-    const response = await fetch(secretUrl, {
-      headers: {
-        Authorization: secretKey,
-      },
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    const result = await response.json();
-    return result;
   }
+  const response = await fetch(secretUrl, {
+    headers: {
+      Authorization: secretKey,
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return result;
 }
 function storeData({ prediction, inputs }, Lang) {
   if (Lang === "Pidgin") {
