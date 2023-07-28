@@ -78,7 +78,7 @@ export default function Section() {
                 }
               />
             </div>
-            <div className="py-2 md:py-8 text-center w-3/4 rounded-md row-span-2 mx-auto mb-4 md:w-[98%] ">
+            <div className="py-2 md:py-8 text-left w-3/4 rounded-md row-span-2 mx-auto mb-4 md:w-[98%] ">
               <span
                 className="text-3xl font-black bg-clip-text 
                                         text-transparent bg-gradient-to-r 
